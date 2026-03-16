@@ -20,17 +20,25 @@ app.post("/post-test", (req, res) => {
     }
 
     // use resend to send an email with the message and timestamp
-    sendEmail(req.body.message);
+    sendEmail(req.body.message, res);
 });
 
 
-async function sendEmail(message) {
-  await resend.emails.send({
-    from: 'onboarding@resend.dev',
-    to: 'arthurcocker02@gmail.com',
-    subject: 'hello world',
-    html: `<p>${message}</p>`,
-  });
+async function sendEmail(message, res) {
+  try{
+    await resend.emails.send({
+        from: 'onboarding@resend.dev',
+        to: 'arthurcocker02@gmail.com',
+        subject: 'hello world',
+        html: `<p>${message}</p>`,
+      });
+    
+    res.json({ status: 'Email sent successfully' });
+  }
+  catch(error){
+    console.error(error);
+    res.status(500).json({ error: 'Failed to send email' });
+  }
 }
 
 // get request
