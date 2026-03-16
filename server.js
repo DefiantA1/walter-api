@@ -42,7 +42,7 @@ async function sendEmail(message, email, subject, res) {
       });
 
     console.log(response);    
-    res.json({ status: 'Email sent successfully' });
+    res.json({ status: 'Email sent successfully', response: response });
   }
   catch(error){
     console.error(error);
