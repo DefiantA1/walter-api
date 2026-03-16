@@ -19,17 +19,25 @@ app.post("/post-test", (req, res) => {
         return res.status(400).json({ error: 'Message is required' });
     }
 
+    if (!req.body.email) {
+        return res.status(400).json({ error: 'Email is required' });
+    }
+
+    if (!req.body.subject) {
+        return res.status(400).json({ error: 'Subject is required' });
+    }
+
     // use resend to send an email with the message and timestamp
-    sendEmail(req.body.message, res);
+    sendEmail(req.body.message, req.body.email, req.body.subject, res);
 });
 
 
-async function sendEmail(message, res) {
+async function sendEmail(message, email, subject, res) {
   try{
     await resend.emails.send({
         from: 'onboarding@resend.dev',
-        to: 'arthurcocker02@gmail.com',
-        subject: 'hello world',
+        to: email,
+        subject: subject,
         html: `<p>${message}</p>`,
       });
     
