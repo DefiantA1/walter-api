@@ -34,13 +34,14 @@ app.post("/post-test", (req, res) => {
 
 async function sendEmail(message, email, subject, res) {
   try{
-    await resend.emails.send({
+    const response = await resend.emails.send({
         from: 'onboarding@resend.dev',
         to: email,
         subject: subject,
         html: `<p>${message}</p>`,
       });
-    
+
+    console.log(response);    
     res.json({ status: 'Email sent successfully' });
   }
   catch(error){
