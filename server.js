@@ -17,12 +17,14 @@ app.post("/test", (req, res) => {
 
 // get request
 app.get("/test", (req, res) => {
-  console.log("Received GET:");
-  console.log("Headers:", req.headers);
-  console.log("Body:", req.body);
-
-  // Echo back
-  res.json({ status: "ok", received: req.body });
+    const data = {
+        message: 'Hello, World!',
+        status: 200,
+        timestamp: new Date().toISOString()
+    };
+    
+    // Use res.json() to send a structured JSON response
+    res.json(data); 
 });
 
 // put request
