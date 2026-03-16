@@ -1,9 +1,11 @@
-// save as server.js
 import express from 'express';
 import { Resend } from 'resend';
+import dotenv from 'dotenv';
 
-// const apiKey = 're_KekeZP3E_LHFeR23Yowz8MUhEofDYzM2J';
-const resend = new Resend(process.env.RESEND_API_KEY);
+dotenv.config();
+
+const apiKey = process.env.RESEND_API_KEY;
+const resend = new Resend(apiKey);
 
 const app = express();
 const port = 3000;
