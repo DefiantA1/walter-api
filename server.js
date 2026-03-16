@@ -6,13 +6,13 @@ const port = 3000;
 // parse JSON bodies
 app.use(express.json());
 
-app.post("/test", (req, res) => {
-  console.log("Received POST:");
-  console.log("Headers:", req.headers);
-  console.log("Body:", req.body);
-
+app.post("/post-test", (req, res) => {
   // Echo back
-  res.json({ status: "ok", received: req.body });
+  res.json({ 
+    message: 'POST Request Received! It worked!',
+    status: 200,
+    timestamp: new Date().toISOString()
+  });
 });
 
 // get request
