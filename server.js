@@ -1,5 +1,10 @@
 // save as server.js
-const express = require("express");
+import express from 'express';
+import { Resend } from 'resend';
+
+// const apiKey = 're_KekeZP3E_LHFeR23Yowz8MUhEofDYzM2J';
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 const app = express();
 const port = 3000;
 
@@ -7,13 +12,24 @@ const port = 3000;
 app.use(express.json());
 
 app.post("/post-test", (req, res) => {
-  // Echo back
-  res.json({ 
-    message: 'POST Request Received! It worked!',
-    status: 200,
-    timestamp: new Date().toISOString()
-  });
+
+    if (!req.body.message) {
+        return res.status(400).json({ error: 'Message is required' });
+    }
+
+    // use resend to send an email with the message and timestamp
+    sendEmail(req.body.message);
 });
+
+
+async function sendEmail(message) {
+  await resend.emails.send({
+    from: 'onboarding@resend.dev',
+    to: 'arthurcocker02@gmail.com',
+    subject: 'hello world',
+    html: `<p>${message}</p>`,
+  });
+}
 
 // get request
 app.get("/test", (req, res) => {
