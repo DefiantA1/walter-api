@@ -1,17 +1,20 @@
-const express = require('express');
+// save as server.js
+const express = require("express");
 const app = express();
+const port = 3000;
 
+// parse JSON bodies
 app.use(express.json());
 
-app.post('/api/data', (req, res) => {
-    console.log(req.body);
-    res.send({ success: true });
+app.post("/test", (req, res) => {
+  console.log("Received POST:");
+  console.log("Headers:", req.headers);
+  console.log("Body:", req.body);
+
+  // Echo back
+  res.json({ status: "ok", received: req.body });
 });
 
-app.get('/', (req, res) => {
-    res.send('Server running');
-});
-
-app.listen(80, '0.0.0.0', () => {
-    console.log('Listening on port 80');
+app.listen(port, () => {
+  console.log(`Debug server listening at http://localhost:${port}`);
 });
