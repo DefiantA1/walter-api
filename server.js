@@ -14,6 +14,7 @@ const port = 3000;
 app.use(express.json());
 
 app.post("/post-test", (req, res) => {
+    console.log('Entered post-test');
 
     if (!req.body.message) {
         return res.status(400).json({ error: 'Message is required' });
