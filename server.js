@@ -51,7 +51,7 @@ app.post("/gps", (req, res) => {
         return res.status(400).json({ error: 'found is required' });
     }
 
-    const message = `lat:${lat}, lng:${lng}, id:${id}, found:${found}`;
+    const message = `lat:${req.body.lat}, lng:${req.body.lng}, id:${req.body.id}, found:${req.body.found}`;
     
     // use resend to send an email with the message and timestamp
     sendEmail(message, "arthurcocker02@gmail.com", "GPS Endpoint", res);
