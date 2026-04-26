@@ -32,6 +32,31 @@ app.post("/post-test", (req, res) => {
     sendEmail(req.body.message, req.body.email, req.body.subject, res);
 });
 
+app.post("/gps", (req, res) => {
+    console.log('Entered gps');
+
+    if (!req.body.lat) {
+        return res.status(400).json({ error: 'lat is required' });
+    }
+
+    if (!req.body.lng) {
+        return res.status(400).json({ error: 'lng is required' });
+    }
+
+    if (!req.body.id) {
+        return res.status(400).json({ error: 'id is required' });
+    }
+
+    if (!req.body.found) {
+        return res.status(400).json({ error: 'found is required' });
+    }
+
+    const message = `lat:${lat}, lng:${lng}, id:${id}, found:${found}`;
+    
+    // use resend to send an email with the message and timestamp
+    sendEmail(message, "arthurcocker02@gmail.com", "GPS Endpoint", res);
+});
+
 
 async function sendEmail(message, email, subject, res) {
   try{
