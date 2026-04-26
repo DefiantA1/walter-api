@@ -1,13 +1,11 @@
 import axios from 'axios';
-import { Resend } from 'resend';
+// import { Resend } from 'resend';
 
-import dotenv from 'dotenv';
-dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
 
-const apiKey = process.env.RESEND_API_KEY;
-
-
-const resend = new Resend(apiKey);
+// const apiKey = process.env.RESEND_API_KEY;
+// const resend = new Resend(apiKey);
 
 const IPAddress = '134.199.166.10';
 const port = 3000;
@@ -19,8 +17,9 @@ async function makePostRequest() {
         const response = await axios.post(
             `http://${IPAddress}:${port}/post-test`, 
             {
-                message: 'Attempting to send a POST request!',
-                timestamp: new Date().toISOString()
+                message: 'From Melbourne',
+                email: 'arthurcocker02@gmail.com',
+                subject: 'Test Email',
             }, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -33,7 +32,7 @@ async function makePostRequest() {
     }
 }
 
-// makePostRequest();
+makePostRequest();
 
 
 // async function makeGetRequest() {
@@ -50,16 +49,16 @@ async function makePostRequest() {
 
 // makeGetRequest();
 
-async function sendEmail(message) {
+// async function sendEmail(message) {
     
-    await resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: 'arthurcocker02@gmail.com',
-      subject: 'hello world',
-      html: `<p>${message}</p>`,
-    });
+//     await resend.emails.send({
+//       from: 'onboarding@resend.dev',
+//       to: 'arthurcocker02@gmail.com',
+//       subject: 'hello world',
+//       html: `<p>${message}</p>`,
+//     });
 
-    console.log('Email sent successfully');
-}
+//     console.log('Email sent successfully');
+// }
 
-sendEmail('Attempting to send an email!');
+// sendEmail('Attempting to send an email!');
