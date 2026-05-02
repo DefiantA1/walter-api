@@ -36,10 +36,12 @@ app.post("/gps", (req, res) => {
     console.log('Entered gps');
 
     if (!req.body.lat) {
+        console.log('lat is required');
         return res.status(400).json({ error: 'lat is required' });
     }
 
     if (!req.body.lng) {
+        console.log('lng is required');
         return res.status(400).json({ error: 'lng is required' });
     }
 
@@ -52,6 +54,7 @@ app.post("/gps", (req, res) => {
     }
 
     const message = `lat:${req.body.lat}, lng:${req.body.lng}, id:${req.body.id}, found:${req.body.found}`;
+    console.log(`message: ${message}`);
     
     // use resend to send an email with the message and timestamp
     sendEmail(message, "arthurcocker02@gmail.com", "GPS Endpoint", res);
