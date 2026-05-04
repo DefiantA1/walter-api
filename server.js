@@ -59,7 +59,8 @@ app.post("/gps", (req, res) => {
         message = `lat:${req.body.lat}, lng:${req.body.lng}, id:${req.body.id}, found:${req.body.found}`;
     }
     else{
-        message = convertToMapsLink(req.body.lat, req.body.lng);
+        const mapLink = convertToMapsLink(req.body.lat, req.body.lng);
+        message = `Tracker ID: ${req.body.id}\nGoogle Maps Link: ${mapLink}`;
     }
 
     console.log(`message: ${message}`);
