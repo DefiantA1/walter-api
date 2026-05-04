@@ -95,7 +95,7 @@ async function sendEmail(message, email, subject, res) {
         html: `<p>${message}</p>`,
       });
 
-    console.log(response);    
+    console.log(`Email sent successfully`); 
     res.json({ status: 'Email sent successfully'});
   }
   catch(error){
