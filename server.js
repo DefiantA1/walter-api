@@ -55,7 +55,7 @@ app.post("/gps", (req, res) => {
 
     let message = '';
 
-    if(!req.body.found){
+    if(req.body.found == "0" || req.body.found == 0){
         message = `lat:${req.body.lat}, lng:${req.body.lng}, id:${req.body.id}, found:${req.body.found}`;
     }
     else{
