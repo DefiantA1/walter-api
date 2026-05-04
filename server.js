@@ -53,12 +53,36 @@ app.post("/gps", (req, res) => {
         return res.status(400).json({ error: 'found is required' });
     }
 
-    const message = `lat:${req.body.lat}, lng:${req.body.lng}, id:${req.body.id}, found:${req.body.found}`;
+    let message = '';
+
+    if(!req.body.found){
+        message = `lat:${req.body.lat}, lng:${req.body.lng}, id:${req.body.id}, found:${req.body.found}`;
+    }
+    else{
+        message = convertToMapsLink(req.body.lat, req.body.lng);
+    }
+
     console.log(`message: ${message}`);
     
     // use resend to send an email with the message and timestamp
     sendEmail(message, "arthurcocker02@gmail.com", "GPS Endpoint", res);
 });
+
+
+function convertToMapsLink(lat, lng){
+    function convert(coord) {
+        const degrees = Math.floor(coord / 100);
+        const minutes = coord - (degrees * 100);
+        return degrees + (minutes / 60);
+    }
+
+    const decimalLat = -convert(lat); // South
+    const decimalLng = -convert(lng); // West
+
+    const url = `https://www.google.com/maps?q=${decimalLat},${decimalLng}`;
+
+    return url;
+}
 
 
 async function sendEmail(message, email, subject, res) {
