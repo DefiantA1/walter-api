@@ -1,11 +1,4 @@
 import axios from 'axios';
-// import { Resend } from 'resend';
-
-// import dotenv from 'dotenv';
-// dotenv.config();
-
-// const apiKey = process.env.RESEND_API_KEY;
-// const resend = new Resend(apiKey);
 
 const IPAddress = '134.199.166.10';
 const port = 3000;
@@ -32,33 +25,29 @@ async function makePostRequest() {
     }
 }
 
-makePostRequest();
 
+async function makeGPSRequest() {
+    try {
+        const latNMEA = 2108.042223;
+        const lngNMEA = 17512.211509;
 
-// async function makeGetRequest() {
-//     try {
-//         const response = await axios.get(
-//             `http://${IPAddress}:${port}/test`
-//         );  
+        const response = await axios.post(
+            `http://${IPAddress}:${port}/gps`, 
+            {
+                lat: latNMEA,
+                lng: lngNMEA,
+                id: '001',
+                found: true
+            }, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });  
 
-//         console.log(response.data);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// }
+        console.log(response.data);
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-// makeGetRequest();
-
-// async function sendEmail(message) {
-    
-//     await resend.emails.send({
-//       from: 'onboarding@resend.dev',
-//       to: 'arthurcocker02@gmail.com',
-//       subject: 'hello world',
-//       html: `<p>${message}</p>`,
-//     });
-
-//     console.log('Email sent successfully');
-// }
-
-// sendEmail('Attempting to send an email!');
+makeGPSRequest();
