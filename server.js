@@ -75,8 +75,11 @@ async function sendToServer(data, message, res){
         // Format the data
         const found = (data.found === "1" || data.found === 1 || data.found === true);
 
-        const lat = Number(data.lat);
-        const lng = Number(data.lng);
+        const latNMEA = Number(data.lat);
+        const lngNMEA = Number(data.lng);
+
+        const lat = convert(latNMEA) * -1;
+        const lng = convert(lngNMEA) * -1;
 
         const response = await fetch(
             "https://addbeetlegps-njwryunntq-uc.a.run.app",
@@ -103,13 +106,13 @@ async function sendToServer(data, message, res){
     }
 }
 
-function convertToMapsLink(lat, lng){
-    function convert(coord) {
-        const degrees = Math.floor(coord / 100);
-        const minutes = coord - (degrees * 100);
-        return degrees + (minutes / 60);
-    }
+function convert(coord) {
+    const degrees = Math.floor(coord / 100);
+    const minutes = coord - (degrees * 100);
+    return degrees + (minutes / 60);
+}
 
+function convertToMapsLink(lat, lng){
     const decimalLat = -convert(lat); // South
     const decimalLng = -convert(lng); // West
 
