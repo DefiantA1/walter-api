@@ -100,7 +100,7 @@ async function sendToServer(data, message, res){
         console.log(`response from firebase: ${response.message}`);
 
         // const data = await response.json();
-        await sendEmail(message, res);
+        // await sendEmail(message, res);
     } catch (error) {
         console.error("Error:", error);
     }
