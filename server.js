@@ -72,8 +72,11 @@ app.post("/gps", (req, res) => {
 
 async function sendToServer(data, message, res){
     try {
-
+        // Format the data
         const found = (data.found === "1" || data.found === 1 || data.found === true);
+
+        const lat = Number(data.lat);
+        const lng = Number(data.lng);
 
         const response = await fetch(
             "https://addbeetlegps-njwryunntq-uc.a.run.app",
@@ -83,8 +86,8 @@ async function sendToServer(data, message, res){
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    lat: data.lat,
-                    lng: data.lng,
+                    lat: lat,
+                    lng: lng,
                     id: data.id,
                     found: found,
                 }),
