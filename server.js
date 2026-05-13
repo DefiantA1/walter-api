@@ -33,6 +33,7 @@ app.post("/post-test", (req, res) => {
 });
 
 app.post("/gps", (req, res) => {
+    console.log('----------------------');
     console.log('Entered gps');
 
     if (!req.body.lat) {
