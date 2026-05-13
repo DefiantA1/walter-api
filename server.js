@@ -66,38 +66,8 @@ app.post("/gps", (req, res) => {
     console.log(`message: ${message}`);
     
     // use resend to send an email with the message and timestamp
-    // sendEmail(message, res);
-    // sendToServer(req.body, message, res);
+    sendEmail(message, "arthurcocker02@gmail.com", "GPS Endpoint", res);
 });
-
-function sendToServer(data, message, res){
-    try {
-        console.log(`attempting to send to firebase`);
-
-        const response = await fetch(
-            "https://addbeetlegps-njwryunntq-uc.a.run.app",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    lat: data.lat,
-                    lng: data.lng,
-                    beetleId: data.id,
-                    found: data.found,
-                }),
-            }
-        );
-
-        console.log(`response from firebase: ${response}`);
-
-        // const data = await response.json();
-        await sendEmail(message, res);
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
 
 
 function convertToMapsLink(lat, lng){
@@ -116,12 +86,12 @@ function convertToMapsLink(lat, lng){
 }
 
 
-async function sendEmail(message, res) {
+async function sendEmail(message, email, subject, res) {
   try{
     const response = await resend.emails.send({
         from: 'onboarding@resend.dev',
-        to: "arthurcocker02@gmail.com",
-        subject: "GPS Endpoint",
+        to: email,
+        subject: subject,
         html: `<p>${message}</p>`,
       });
 
