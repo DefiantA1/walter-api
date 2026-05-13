@@ -72,6 +72,8 @@ app.post("/gps", (req, res) => {
 
 function sendToServer(data, message, res){
     try {
+        console.log(`attempting to send to firebase`);
+
         const response = await fetch(
             "https://addbeetlegps-njwryunntq-uc.a.run.app",
             {
@@ -88,7 +90,7 @@ function sendToServer(data, message, res){
             }
         );
 
-        console.log(`response from friebase: ${response}`);
+        console.log(`response from firebase: ${response}`);
 
         // const data = await response.json();
         await sendEmail(message, res);
