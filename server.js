@@ -82,7 +82,7 @@ async function sendToServer(data, message, res){
                 body: JSON.stringify({
                     lat: data.lat,
                     lng: data.lng,
-                    beetleId: data.id,
+                    id: data.id,
                     found: data.found,
                 }),
             }
