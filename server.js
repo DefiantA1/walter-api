@@ -67,7 +67,7 @@ app.post("/gps", (req, res) => {
     
     // use resend to send an email with the message and timestamp
     // sendEmail(message, res);
-    sendToServer(req.body, message, res);
+    // sendToServer(req.body, message, res);
 });
 
 function sendToServer(data, message, res){
